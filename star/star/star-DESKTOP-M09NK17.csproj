@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{32307C38-5A83-4646-8DA9-63EA2174FA61}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>star</RootNamespace>
+    <AssemblyName>star</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="RhinoCommon">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Rhino 6\System\rhinocommon.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Grasshopper">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Rhino 6\Plug-ins\Grasshopper\Grasshopper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="GH_IO">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Rhino 6\Plug-ins\Grasshopper\GH_IO.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Curve\Angle bisector.cs" />
+    <Compile Include="Curve\BézierCurveType.cs" />
+    <Compile Include="Curve\NurbsToBezier.cs" />
+    <Compile Include="Curve\Curve Degree.cs" />
+    <Compile Include="Display\blingbling.cs" />
+    <Compile Include="Display\Guid TextDot.cs" />
+    <Compile Include="Display\unti.cs" />
+    <Compile Include="Domain\origin domain.cs" />
+    <Compile Include="Curve\CurveType.cs" />
+    <Compile Include="Curve\Divide Curve.cs" />
+    <Compile Include="Domain\domain reverse.cs" />
+    <Compile Include="Curve\Line BothSides%28Point%29.cs" />
+    <Compile Include="Curve\Line BothSides%28Vector%29.cs" />
+    <Compile Include="Display\Guid Text.cs" />
+    <Compile Include="Curve\long short curve.cs" />
+    <Compile Include="M1\Common Divisor.cs" />
+    <Compile Include="M1\in to mm.cs" />
+    <Compile Include="M1\size swap.cs" />
+    <Compile Include="M1\To Centimeters.cs" />
+    <Compile Include="M1\To Meters.cs" />
+    <Compile Include="M1\To mm.cs" />
+    <Compile Include="M1\Xx2.cs" />
+    <Compile Include="M1\x÷2.cs" />
+    <Compile Include="Point\Round Point.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\Number domain Component.cs" />
+    <Compile Include="za\stardycs.cs" />
+    <Compile Include="starInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Surface\UnTrim or Trim.cs" />
+    <Compile Include="Transform\Vector Align.cs" />
+    <Compile Include="za\starlogo.cs" />
+    <Compile Include="za\作者想讲的一些话.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Resources\OtherComponents.ImageGalleryEditor.resources" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\guid_text.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Common Divisor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UnTrim or Trim.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Line BothSides%28Point%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Line BothSides%28Vector%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CurveType.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Angle bisector.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BézierCurveType.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\long short curve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Divide Curve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Vector ailgn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\domain reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\origin domain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hua.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\in to mm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\To cm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\To m.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\To mm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\unti.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\xchengyi2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\xchuyi2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\curve degree.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\size swap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blingbilng.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blingbling.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\number domain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NurbsToBezier.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>Copy "$(TargetPath)" "C:\Users\l9815\AppData\Roaming\Grasshopper\Libraries\star.gha"
+Erase "$(TargetPath)"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <FallbackCulture>en-US</FallbackCulture>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <StartProgram>C:\Program Files\Rhino 6\System\Rhino.exe</StartProgram>
+    <StartArguments>
+    </StartArguments>
+    <StartAction>Program</StartAction>
+  </PropertyGroup>
+</Project>
