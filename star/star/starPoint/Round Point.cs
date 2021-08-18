@@ -44,7 +44,6 @@ namespace star
         {
             List<Point3d> oripoint = new List<Point3d>();
             DA.GetDataList(0, oripoint);
-
             List<Point3d> roundpoints = roundpoint(oripoint);
 
             //List<double> pointx = new List<double>();

@@ -44,11 +44,17 @@ namespace star.Display
         {
             List<Point3d> p = new List<Point3d>();
             DA.GetDataList(0, p);
-            
-            px.AddRange(p);
+
+            px1(p);
         }
 
-        public List<Point3d> px=new List<Point3d>();
+        private static List<Point3d> px;
+
+        public static List<Point3d> px1(List<Point3d> pp)
+        {
+            px = pp;
+            return px;
+        }
         public int a1;
         public bool a = false;
         public bool b = false;

@@ -122,6 +122,7 @@ namespace star
             return result;
         }
         #endregion
+
         #region GCD&LCM
         public static int GCD(List<int> listOri)
         {
@@ -167,115 +168,95 @@ namespace star
             return c;
         }
         #endregion
-        //Administrator  l9815
-        public static GH_Structure<GH_Number> Mergedata(GH_Structure<GH_Number> Numbers, double Tolarance, int dec, bool iflist = false)
+
+        #region MergeSort
+        public static void MergeSort(List<double> array)
         {
-            GH_Structure<GH_Number> gh_Structure = new GH_Structure<GH_Number>();
-            checked
+            MergeSort(array, 0, array.Count - 1);  //在调用里调用Mergesort并赋值（array，起始值，数组-1的长度）
+        }
+
+        private static void MergeSort(List<double> array, int p, int a) //被调用方法（array是赋值的数组，p代表起始值赋值，a代表数组-1的长度，对应上面）
+        {
+            if (p < a)  //如果，起始值小于数组-1的长度
             {
-                GH_Structure<GH_Number> result;
-                if (Numbers.Branches.Count == 0)
+                int q = (p + a) / 2;    //找出数组中心
+                MergeSort(array, p, q);  //左数组递归分割
+                MergeSort(array, q + 1, a);  //右数组递归分割
+                Merge(array, p, q, a);
+            }
+        }
+
+        private static void Merge(List<double> array, int p, int q, int r)
+        {
+            double[] L = new double[q - p + 2];
+            double[] R = new double[r - q + 1];
+            L[q - p + 1] = int.MaxValue;
+            R[r - q] = int.MaxValue;
+
+            for (int i = 0; i < q - p + 1; i++)
+            {
+                L[i] = array[p + i];
+            }
+
+            for (int i = 0; i < r - q; i++)
+            {
+                R[i] = array[q + 1 + i];
+            }
+
+            int j = 0;
+            int k = 0;
+            for (int i = 0; i < r - p + 1; i++)
+            {
+                if (L[j] <= R[k])
                 {
-                    result = Numbers;
-                }
-                else if (Numbers.Branches.Count == 1)
-                {
-                    if (Numbers.DataCount <= 1)
-                    {
-                        result = Numbers;
-                    }
-                    else
-                    {
-                        GH_Structure<GH_Number> gh_Structure2 = Numbers.Duplicate();
-                        gh_Structure2.Graft(3);
-                        result = Mergedata(gh_Structure2, Tolarance, dec, true);
-                    }
+                    array[p + i] = L[j];
+                    j++;
                 }
                 else
                 {
-                    int count = Numbers.get_Branch(0).Count;
-                    int num = Numbers.Branches.Count - 1;
-                    for (int i = 0; i <= num; i++)
-                    {
-                        if (Numbers.get_Branch(i).Count != count)
-                        {
-                            Interaction.MsgBox("不同树干的果实数量不全相等，请核对数据。", MsgBoxStyle.OkOnly, "SEG");
-                            return Numbers;
-                        }
-                    }
-                    int num2 = count - 1;
-                    for (int j = 0; j <= num2; j++)
-                    {
-                        List<double> list = new List<double>();
-                        List<int> list2 = new List<int>();
-                        List<Point3d> list3 = new List<Point3d>();
-                        int num3 = Numbers.Branches.Count - 1;
-                        for (int k = 0; k <= num3; k++)
-                        {
-                            GH_Number gh_Number = (GH_Number)Numbers.get_Branch(k)[j];
-                            list.Add(gh_Number.Value);
-                            list2.Add(k);
-                        }
-                        Array array = list.ToArray();
-                        Array array2 = list2.ToArray();
-                        Array.Sort(array, array2);
-                        try
-                        {
-                            foreach (object value in array)
-                            {
-                                double num4 = Conversions.ToDouble(value);
-                                Point3d item = new Point3d(num4, 0.0, 0.0);
-                                list3.Add(item);
-                            }
-                        }
-                        finally
-                        {
-                            IEnumerator enumerator;
-                            if (enumerator is IDisposable)
-                            {
-                                (enumerator as IDisposable).Dispose();
-                            }
-                        }
-                        Array array3 = SegPointUtility.GroupPointByGH(list3, Tolarance, SegPointUtility.CullMode.Average).ToArray();
-                        Array.Sort(array2, array3);
-                        int num5 = array3.Length - 1;
-                        for (int l = 0; l <= num5; l++)
-                        {
-                            object value3;
-                            object[] array4;
-                            bool[] array5;
-                            object value2 = NewLateBinding.LateGet(null, typeof(Math), "Round", array4 = new object[]
-                            {
-                                NewLateBinding.LateGet(value3 = array3.GetValue(l), null, "X", new object[0], null, null, null),
-                                dec
-                            }, null, null, array5 = new bool[]
-                            {
-                                true,
-                                true
-                            });
-                            if (array5[0])
-                            {
-                                NewLateBinding.LateSetComplex(value3, null, "X", new object[]
-                                {
-                                    array4[0]
-                                }, null, null, true, true);
-                            }
-                            if (array5[1])
-                            {
-                                dec = (int)Conversions.ChangeType(RuntimeHelpers.GetObjectValue(array4[1]), typeof(int));
-                            }
-                            double num6 = Conversions.ToDouble(value2);
-                            gh_Structure.Append(new GH_Number(num6), new GH_Path(l));
-                        }
-                    }
-                    if (iflist)
-                    {
-                        gh_Structure.Flatten(null);
-                    }
-                    result = gh_Structure;
+                    array[p + i] = R[k];
+                    k++;
                 }
-                return result;
             }
         }
+        #endregion
+        //Administrator  l9815
+    }
+
+    class starcurvedy
+    {
+        #region 提取曲线的中心点
+        public static Point3d curvecenter(Curve curve)
+        {
+            curve.Domain = new Interval(0, 1);
+            Point3d pp=curve.PointAt(0.5);
+            return pp;
+        }
+
+        public static List<Point3d> curvecenter(List<Curve> curves)
+        {
+            List<Point3d> listpoints = new List<Point3d>();
+            for (int i = 0; i < curves.Count; i++)
+            {
+                curves[i].Domain = new Interval(0, 1);
+                listpoints.Add(curves[i].PointAt(0.5));
+            }
+            return listpoints;
+        }
+
+
+        public static List<Point3d> curvecenter(Curve[] curves)
+        {
+            List<Point3d> curveMid = new List<Point3d>();
+            for (int i = 0; i < curves.Length; i++)
+            {
+                curves[i].Domain = new Interval(0, 1);
+                curveMid.Add(curves[i].PointAt(0.5));
+            }
+            return curveMid;
+        }
+        #endregion
+
+
     }
 }

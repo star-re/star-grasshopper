@@ -36,6 +36,15 @@
     </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GH_IO">
+      <HintPath>..\..\..\..\Plug-ins\Grasshopper\GH_IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Grasshopper">
+      <HintPath>..\..\..\..\Plug-ins\Grasshopper\Grasshopper.dll</HintPath>
+    </Reference>
+    <Reference Include="RhinoCommon">
+      <HintPath>..\..\..\..\System\RhinoCommon.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -43,21 +52,6 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="RhinoCommon">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\Rhino 6\System\rhinocommon.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Grasshopper">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\Rhino 6\Plug-ins\Grasshopper\Grasshopper.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="GH_IO">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\Rhino 6\Plug-ins\Grasshopper\GH_IO.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Curve\Angle bisector.cs" />
@@ -68,7 +62,7 @@
     <Compile Include="Display\Guid TextDot.cs" />
     <Compile Include="Display\unti.cs" />
     <Compile Include="M1\Bool Index.cs" />
-    <Compile Include="M1\sample.cs" />
+    <Compile Include="M1\Merge Sort.cs" />
     <Compile Include="starDomain\origin domain.cs" />
     <Compile Include="Curve\CurveType.cs" />
     <Compile Include="Curve\Divide Curve.cs" />
@@ -85,6 +79,7 @@
     <Compile Include="M1\To mm.cs" />
     <Compile Include="M1\Xx2.cs" />
     <Compile Include="M1\x÷2.cs" />
+    <Compile Include="starPoint\Group Points.cs" />
     <Compile Include="starPoint\Round Point.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -200,6 +195,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\bool index.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Group Points.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
