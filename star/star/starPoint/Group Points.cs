@@ -52,7 +52,7 @@ namespace star.starPoint
             /*------------------------------*/
             List<Point3d> ps = new List<Point3d>();
             List<int> Index = new List<int>(10);
-            List<Point3d> result = new List<Point3d>();
+         //   List<Point3d> result = new List<Point3d>();
             for (int i = 0; i < TargetPoint.Count; i++)
             {
                 // ps = p3();
@@ -60,13 +60,13 @@ namespace star.starPoint
                 {
                     if (TargetPoint[i].DistanceTo(Points[j]) <= Distance)
                     {
-                        ps.Insert(0, Points[j]);
+                        ps.Add(Points[j]);
                         Index.Add(j);
                     }
                 }
-                result.AddRange(ps);
+            //    result.AddRange(ps);
             }
-            DA.SetDataList(0, result);
+            DA.SetDataList(0, ps);
             DA.SetDataList(1, Index);
         }
 

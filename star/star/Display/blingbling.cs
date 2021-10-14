@@ -10,6 +10,12 @@ namespace star.Display
 {
     public class blingbling : GH_Component
     {
+        //protected blingbling(string name, string nickname, string description)
+        //    : base()
+        //{
+        //}
+
+
         /// <summary>
         /// Initializes a new instance of the blingbling class.
         /// </summary>
@@ -44,7 +50,7 @@ namespace star.Display
         {
             List<Point3d> p = new List<Point3d>();
             DA.GetDataList(0, p);
-
+            
             px1(p);
         }
 

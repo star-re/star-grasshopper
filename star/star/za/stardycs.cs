@@ -12,7 +12,7 @@ namespace star
     class stardy
     {
         #region 单位文字群
-        public string  unitstring(string a)
+        public string unitstring(string a)
         {
             string result = null;
             if (a == "Millimeters")
@@ -221,19 +221,41 @@ namespace star
         }
         #endregion
         //Administrator  l9815
+
+        /// <summary>
+        /// 求点群均点
+        /// </summary>
+        /// <param name="points"></param>
+        /// <returns></returns>
+        public Point3d Pointaverage(List<Point3d> points)
+        {
+            List<double> xa = new List<double>();
+            List<double> ya = new List<double>();
+            List<double> za = new List<double>();
+            for (int i = 0; i < points.Count; i++)
+            {
+                xa.Add(points[i].X);
+                ya.Add(points[i].Y);
+                za.Add(points[i].Z);
+            }
+            double xx = xa.Average();
+            double yy = ya.Average();
+            double zz = za.Average();
+            return new Point3d(xx, yy, zz);
+        }
     }
 
     class starcurvedy
     {
         #region 提取曲线的中心点
-        public static Point3d curvecenter(Curve curve)
+        public Point3d curvecenter(Curve curve)
         {
             curve.Domain = new Interval(0, 1);
-            Point3d pp=curve.PointAt(0.5);
+            Point3d pp = curve.PointAt(0.5);
             return pp;
         }
 
-        public static List<Point3d> curvecenter(List<Curve> curves)
+        public List<Point3d> curvecenter(List<Curve> curves)
         {
             List<Point3d> listpoints = new List<Point3d>();
             for (int i = 0; i < curves.Count; i++)
@@ -244,8 +266,7 @@ namespace star
             return listpoints;
         }
 
-
-        public static List<Point3d> curvecenter(Curve[] curves)
+        public List<Point3d> curvecenter(Curve[] curves)
         {
             List<Point3d> curveMid = new List<Point3d>();
             for (int i = 0; i < curves.Length; i++)
@@ -257,6 +278,182 @@ namespace star
         }
         #endregion
 
+        #region 曲线顺时针
+        public bool IsAligned(Curve curve)
+        {
+            int num = curve.SpanCount * Math.Min(curve.Degree, 3);
+            int num2 = 0;
+            Point3d point3D = curve.GetBoundingBox(true).Center;
+            Circle circle = new Circle(point3D, 0.5);
+            Curve guide = circle.ToNurbsCurve();
+            guide.Reverse();
+            for (int i = 0; i < num; i++)
+            {
+                double t = curve.Domain.ParameterAt((double)i / (double)num);
+                Point3d testPoint = curve.PointAt(t);
+                Vector3d vector3d = curve.TangentAt(t);
+                double t2;
+                if (guide.ClosestPoint(testPoint, out t2))
+                {
+                    Vector3d other = guide.TangentAt(t2);
+                    if (vector3d.IsParallelTo(other, 1.5707963267948966) >= 0)
+                    {
+                        num2++;
+                    }
+                    else
+                    {
+                        num2--;
+                    }
+                }
+            }
+            return num2 >= 0;
+        }
+        #endregion
 
+        #region 判断曲线可炸开吗
+        public bool IsExplode(Curve cc)
+        {
+            Curve[] cd = cc.DuplicateSegments();
+            bool re = cd.Length != 0;
+            return re;
+        }
+
+        public List<bool> IsExplode(List<Curve> cc)
+        {
+            Curve[] cd = null;
+            List<bool> re = new List<bool>();
+            for (int i = 0; i < cc.Count; i++)
+            {
+                cd = cc[i].DuplicateSegments();
+                re.Add(cd.Length != 0);
+            }
+            return re;
+        }
+
+        public List<bool> IsExplode(Curve[] cc)
+        {
+            Curve[] cd = null;
+            List<bool> re = new List<bool>();
+            for (int i = 0; i < cc.Length; i++)
+            {
+                cd = cc[i].DuplicateSegments();
+                re.Add(cd.Length != 0);
+            }
+            return re;
+        }
+        #endregion
+    }
+
+    class starMathdy
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="angle"></param>
+        /// <returns></returns>
+        #region 角度转弧度
+        public double Radians(double angle)
+        {
+            double a = angle * Math.PI / 180;
+            return a;
+        }
+        #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="radians"></param>
+        /// <returns></returns>
+        #region 弧度转角度
+        public double Dreeges(double radians)
+        {
+            double a = 180 / Math.PI * radians;
+            return a;
+        }
+        #endregion
+
+        /// <summary>
+        /// 求C弦长度，angle输入角度，height输入高度
+        /// </summary>
+        /// <param name="angle"></param>
+        /// <param name="hei"></param>
+        /// <returns></returns>
+        #region 求C弦长度
+        public double Clength(double angle, double height)
+        {
+            double a = (height / Math.Tan(Radians(angle)));
+            double returndouble = Math.Pow(height, 2) + Math.Pow(a, 2);
+            return Math.Sqrt(returndouble);
+        }
+        #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        public float Q_rsqrt(float number)
+        {
+            long i = 0L;
+            float x2, y;
+            const float threehalfs = 1.5f;
+            x2 = number * 0.5f;
+            y = number;
+            i = 0x5f3759df - (i >> 1);
+            unsafe
+            {
+                y = *(float*)&i;
+            }
+            y = y * (threehalfs - (x2 * y * y));
+            return y;
+        }
+
+        unsafe public List<bool> Jiou(List<int> i)
+        {
+            List<bool> bools = new List<bool>();
+            for (int j = 0; j < i.Count; j++)
+            {
+                if ((i[j] >> 1 << 1) == i[j])
+                {
+                    bools.Add(true);
+                }
+                else
+                {
+                    bools.Add(false);
+                }
+            }
+            return bools;
+        }
+
+        public List<bool> jIou(List<int> i)
+        {
+            List<bool> bools = new List<bool>();
+            for (int j = 0; j < i.Count; j++)
+            {
+                if ((i[j] % 2) == 0)
+                {
+                    bools.Add(true);
+                }
+                else
+                {
+                    bools.Add(false);
+                }
+            }
+            return bools;
+        }
+
+        unsafe public float SingleSqrt(float number)
+        {
+            int i;
+            float x2, y;
+            const float threehalfs = 1.5F;
+            x2 = number * 0.5F;
+            y = number;
+            i = *(int*)&y;   // evil floating point bit level hacking
+            i = 0x5f3759df - (i >> 1); // John Carmack's number
+            y = *(float*)&i;
+            y = y * (threehalfs - (x2 * y * y));
+            return 1 / y;
+        }
     }
 }

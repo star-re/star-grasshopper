@@ -19,7 +19,7 @@ namespace star
             get
             {
                 //Return a 24x24 pixel bitmap to represent this GHA library.
-                return Properties.Resources.star;
+               return Properties.Resources.star;
             }
         }
         public override string Description

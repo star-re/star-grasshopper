@@ -3,18 +3,20 @@ using System.Collections.Generic;
 
 using Grasshopper.Kernel;
 using Rhino.Geometry;
+using Grasshopper;
+using Grasshopper.Kernel.Data;
 
-namespace star.Display
+namespace star.starMesh
 {
-    public class unti : GH_Component
+    public class MeshExplode : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the file class.
+        /// Initializes a new instance of the MeshExplode class.
         /// </summary>
-        public unti()
-          : base("Unti", "unti",
-              "获取当前文件的单位等",
-              "star", "display")
+        public MeshExplode()
+          : base("MeshExplode", "MeshExplode",
+              "网格炸开！",
+              "star", "Mesh")
         {
         }
 
@@ -23,6 +25,7 @@ namespace star.Display
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
+            pManager.AddMeshParameter("Mesh", "M", "网格", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -30,9 +33,7 @@ namespace star.Display
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddTextParameter("Unti", "U", "单位", GH_ParamAccess.item);
-            pManager.AddTextParameter("Tolerance", "T", "绝对公差", GH_ParamAccess.item);
-            pManager.AddTextParameter("Angle Tolerance", "A", "角度公差", GH_ParamAccess.item);
+            pManager.AddMeshParameter("Meshs", "M", "炸开后的网格", GH_ParamAccess.list);
         }
 
         /// <summary>
@@ -41,22 +42,17 @@ namespace star.Display
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            string unit = Rhino.RhinoDoc.ActiveDoc.ModelUnitSystem.ToString();
-            string toler = Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance.ToString();
-            string Atoler = Rhino.RhinoDoc.ActiveDoc.ModelAngleToleranceDegrees.ToString();
+            Mesh mesh = new Mesh();
+            DA.GetData(0, ref mesh);
 
-            stardy stardycs = new stardy();
-            unit = stardycs.unitstring(unit) + unit;
-            DA.SetData(0, unit);
-            DA.SetData(1, toler);
-            DA.SetData(2, Atoler);
-            hid();
+            /*---------------------------------------*/
+            double angleunti = Rhino.RhinoDoc.ActiveDoc.ModelAngleToleranceDegrees;
+            mesh.Unweld(angleunti, true);
+            Mesh[] meshs = mesh.ExplodeAtUnweldedEdges();
+            DA.SetDataList(0, meshs);
+
         }
 
-        private void hid()
-        {
-            this.Hidden = true;
-        }
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -66,7 +62,7 @@ namespace star.Display
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Properties.Resources.unti;
+                return Properties.Resources.MeshExplode;
             }
         }
 
@@ -75,7 +71,7 @@ namespace star.Display
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("a53f4ee1-750f-40f6-8f05-2d2e6d1847a8"); }
+            get { return new Guid("329b47b2-0204-468e-8265-6d1c06b949cf"); }
         }
     }
 }

@@ -58,7 +58,7 @@ namespace star
                 for (int i = 0; i < pdouble.Length; i++)
                 {
                     xAxis.Add(curve.TangentAt(pdouble[i]));
-                    yAxis.Add(Vector3d.CrossProduct(zAxis, xAxis[i]));
+                    yAxis.Add(curve.CurvatureAt(pdouble[i]));
                     pointlist.Add(curve.PointAt(pdouble[i]));
                 }
 

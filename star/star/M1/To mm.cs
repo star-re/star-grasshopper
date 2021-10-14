@@ -42,6 +42,7 @@ namespace star.M1
         {
             double douBle = double.NaN;
             DA.GetData(0, ref douBle);
+
             
             string unit = Rhino.RhinoDoc.ActiveDoc.ModelUnitSystem.ToString();
 

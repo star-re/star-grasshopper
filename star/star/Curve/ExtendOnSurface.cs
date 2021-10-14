@@ -4,17 +4,17 @@ using System.Collections.Generic;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
-namespace star.Display
+namespace star
 {
-    public class unti : GH_Component
+    public class ExtendOnSurface : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the file class.
+        /// Initializes a new instance of the ExtendOnSurface class.
         /// </summary>
-        public unti()
-          : base("Unti", "unti",
-              "获取当前文件的单位等",
-              "star", "display")
+        public ExtendOnSurface()
+          : base("ExtendOnSurface", "ExtendOnSurface",
+              "在曲面上延伸曲线",
+              "star", "Curve")
         {
         }
 
@@ -23,6 +23,8 @@ namespace star.Display
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
+            pManager.AddCurveParameter("Curve", "C", "输入需延伸的曲线", GH_ParamAccess.item);
+            pManager.AddSurfaceParameter("Surface", "Srf", "输入基准曲面", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -30,9 +32,7 @@ namespace star.Display
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddTextParameter("Unti", "U", "单位", GH_ParamAccess.item);
-            pManager.AddTextParameter("Tolerance", "T", "绝对公差", GH_ParamAccess.item);
-            pManager.AddTextParameter("Angle Tolerance", "A", "角度公差", GH_ParamAccess.item);
+            pManager.AddCurveParameter("Curve result", "C", "延伸后的结果", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -41,22 +41,16 @@ namespace star.Display
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            string unit = Rhino.RhinoDoc.ActiveDoc.ModelUnitSystem.ToString();
-            string toler = Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance.ToString();
-            string Atoler = Rhino.RhinoDoc.ActiveDoc.ModelAngleToleranceDegrees.ToString();
+            Curve curve = null;
+            Surface ss = null;
+            DA.GetData(0, ref curve);
+            DA.GetData(1, ref ss);
 
-            stardy stardycs = new stardy();
-            unit = stardycs.unitstring(unit) + unit;
-            DA.SetData(0, unit);
-            DA.SetData(1, toler);
-            DA.SetData(2, Atoler);
-            hid();
+            curve = curve.ExtendOnSurface(CurveEnd.Both, ss);
+            DA.SetData(0, curve);
+
         }
 
-        private void hid()
-        {
-            this.Hidden = true;
-        }
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -64,9 +58,11 @@ namespace star.Display
         {
             get
             {
+                GH_DocumentObject GD = this;
+                GD.SetIconOverride(Properties.Resources.ExtendOnSurface);
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Properties.Resources.unti;
+                return null;
             }
         }
 
@@ -75,7 +71,7 @@ namespace star.Display
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("a53f4ee1-750f-40f6-8f05-2d2e6d1847a8"); }
+            get { return new Guid("8de2b5f0-cbc4-4b56-badd-8e43ef8e3616"); }
         }
     }
 }

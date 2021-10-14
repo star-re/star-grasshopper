@@ -45,18 +45,33 @@ namespace star.Display
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            Guid g = default(Guid);//创建一个新guid
-            GH_Guid gG = new GH_Guid();
-
-            DA.GetData(0, ref gG);//输入数据给g
-            g = gG.Value;
+            object textguid = new object();
+            //Guid g = default(Guid);//创建一个新guid
+           // GH_Guid gG = new GH_Guid();
 
 
             TextDotObject to;
             TextDot textDot = null;
+
+            DA.GetData(0, ref textguid);//输入数据给g
+            string textdottype = "Rhino.Geometry.TextDot";
+            string textdottype1 = textguid.ToString();
+            if (textdottype1 == textdottype)
+            {
+              //  textDot = (TextDot)textguid;
+                GH_ObjectWrapper gow = (GH_ObjectWrapper)textguid;
+                textDot = (TextDot)gow.Value;
+            }
+            else
+            {
+                string a = textguid.ToString();
+                Guid g = new Guid(a);
+                to = Rhino.RhinoDoc.ActiveDoc.Objects.Find(g) as TextDotObject;//查找此guid并转换数据给TO
+                textDot = to.Geometry as TextDot;
+            }
+
             string text;
-            to = Rhino.RhinoDoc.ActiveDoc.Objects.Find(g) as TextDotObject;//查找此guid并转换数据给TO
-            textDot = to.Geometry as TextDot;
+
             text = textDot.Text;
             DA.SetData(0, text);//返回值给输出端
 

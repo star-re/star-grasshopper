@@ -26,6 +26,7 @@ namespace star
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddPointParameter("Points", "Pts", "取整点", GH_ParamAccess.list);
+            pManager.AddIntegerParameter("Round", "R", "点位数", GH_ParamAccess.item,0);
         }
 
         /// <summary>
@@ -43,8 +44,10 @@ namespace star
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             List<Point3d> oripoint = new List<Point3d>();
+            int round = 0;
+            DA.GetData(1, ref round);
             DA.GetDataList(0, oripoint);
-            List<Point3d> roundpoints = roundpoint(oripoint);
+            List<Point3d> roundpoints = roundpoint(oripoint,round);
 
             //List<double> pointx = new List<double>();
             //List<double> pointy = new List<double>();
@@ -101,6 +104,7 @@ namespace star
             //    roundpoints.Add(new Point3d(pointx[i], pointy[i], pointz[i]));
             //}
             DA.SetDataList(0, roundpoints);
+
             message(a1);
         }
 
@@ -109,7 +113,7 @@ namespace star
         public static bool b = false;
         public static bool c = false;
 
-        public static List<Point3d> roundpoint(List<Point3d> oripoints)
+        public static List<Point3d> roundpoint(List<Point3d> oripoints,int round)
         {
             List<double> pointx = new List<double>();
             List<double> pointy = new List<double>();
@@ -142,9 +146,9 @@ namespace star
             {
                 for (int i = 0; i < oripoints.Count; i++)
                 {
-                    pointx.Add(Math.Round(oripoints[i].X));
-                    pointy.Add(Math.Round(oripoints[i].Y));
-                    pointz.Add(Math.Round(oripoints[i].Z));
+                    pointx.Add(Math.Round(oripoints[i].X,round));
+                    pointy.Add(Math.Round(oripoints[i].Y,round));
+                    pointz.Add(Math.Round(oripoints[i].Z,round));
                 }
                 c = true;
             }
@@ -169,8 +173,6 @@ namespace star
             Menu_AppendItem(menu, "Floor", Menu_Circle, true, a);
             Menu_AppendItem(menu, "Ceiling", Menu_RoundControlPoint, true, b);
             Menu_AppendItem(menu, "Round", Menu_Pin, true, c);
-            
-
         }
 
         public void Menu_Circle(Object sender, EventArgs e)
@@ -209,11 +211,14 @@ namespace star
         /// </summary>
         protected override System.Drawing.Bitmap Icon
         {
+
             get
             {
+                GH_DocumentObject gd = this;
+                gd.SetIconOverride(Properties.Resources.Round_Point);
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return Properties.Resources.Round_Point;
+                return null;
             }
         }
 

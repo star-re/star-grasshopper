@@ -56,13 +56,21 @@
   <ItemGroup>
     <Compile Include="Curve\Angle bisector.cs" />
     <Compile Include="Curve\BézierCurveType.cs" />
+    <Compile Include="Curve\ExtendOnSurface.cs" />
+    <Compile Include="Curve\Intersection curve.cs" />
     <Compile Include="Curve\NurbsToBezier.cs" />
     <Compile Include="Curve\Curve Degree.cs" />
+    <Compile Include="Curve\OffsetOnSrf.cs" />
     <Compile Include="Display\blingbling.cs" />
+    <Compile Include="Display\Color reverse.cs" />
     <Compile Include="Display\Guid TextDot.cs" />
+    <Compile Include="Display\Screen Color.cs" />
     <Compile Include="Display\unti.cs" />
     <Compile Include="M1\Bool Index.cs" />
+    <Compile Include="M1\Group Numbers.cs" />
     <Compile Include="M1\Merge Sort.cs" />
+    <Compile Include="M1\MyComponent1.cs" />
+    <Compile Include="M1\MyComponent2.cs" />
     <Compile Include="starDomain\origin domain.cs" />
     <Compile Include="Curve\CurveType.cs" />
     <Compile Include="Curve\Divide Curve.cs" />
@@ -79,6 +87,9 @@
     <Compile Include="M1\To mm.cs" />
     <Compile Include="M1\Xx2.cs" />
     <Compile Include="M1\x÷2.cs" />
+    <Compile Include="starMesh\MeshExplode.cs" />
+    <Compile Include="starMesh\MeshFaceAngle.cs" />
+    <Compile Include="starMesh\MeshShareFace.cs" />
     <Compile Include="starPoint\Group Points.cs" />
     <Compile Include="starPoint\Round Point.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -88,6 +99,7 @@
     </Compile>
     <Compile Include="starDomain\Number domain Component.cs" />
     <Compile Include="starSurface\Iso Curve.cs" />
+    <Compile Include="za\star color.cs" />
     <Compile Include="za\stardycs.cs" />
     <Compile Include="starInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -199,6 +211,30 @@
   <ItemGroup>
     <None Include="Resources\Group Points.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MeshExplode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MeshShareFace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\offset On Surface.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExtendOnSurface.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Group Numbers.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\screen color.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MeshFaceAngle.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -208,7 +244,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>Copy "$(TargetPath)" "C:\Users\Administrator\AppData\Roaming\Grasshopper\Libraries\star.gha"
+    <PostBuildEvent>Copy "$(TargetPath)" "C:\Users\administrator\AppData\Roaming\Grasshopper\Libraries\star.gha"
 Erase "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
@@ -219,5 +255,6 @@ Erase "$(TargetPath)"</PostBuildEvent>
     <StartArguments>
     </StartArguments>
     <StartAction>Program</StartAction>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 </Project>

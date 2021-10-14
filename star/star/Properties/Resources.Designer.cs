@@ -113,6 +113,16 @@ namespace star.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap color_reverse {
+            get {
+                object obj = ResourceManager.GetObject("color_reverse", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Common_Divisor {
             get {
                 object obj = ResourceManager.GetObject("Common_Divisor", resourceCulture);
@@ -166,6 +176,26 @@ namespace star.Properties {
         internal static System.Drawing.Bitmap dotText {
             get {
                 object obj = ResourceManager.GetObject("dotText", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap ExtendOnSurface {
+            get {
+                object obj = ResourceManager.GetObject("ExtendOnSurface", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Group_Numbers {
+            get {
+                object obj = ResourceManager.GetObject("Group_Numbers", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -243,6 +273,36 @@ namespace star.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap MeshExplode {
+            get {
+                object obj = ResourceManager.GetObject("MeshExplode", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap MeshFaceAngle {
+            get {
+                object obj = ResourceManager.GetObject("MeshFaceAngle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap MeshShareFace {
+            get {
+                object obj = ResourceManager.GetObject("MeshShareFace", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap number_domain {
             get {
                 object obj = ResourceManager.GetObject("number_domain", resourceCulture);
@@ -263,6 +323,16 @@ namespace star.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap offset_On_Surface {
+            get {
+                object obj = ResourceManager.GetObject("offset_On_Surface", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap origin_domain {
             get {
                 object obj = ResourceManager.GetObject("origin_domain", resourceCulture);
@@ -276,6 +346,16 @@ namespace star.Properties {
         internal static System.Drawing.Bitmap Round_Point {
             get {
                 object obj = ResourceManager.GetObject("Round_Point", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap screen_color {
+            get {
+                object obj = ResourceManager.GetObject("screen_color", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

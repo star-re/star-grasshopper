@@ -41,10 +41,7 @@ namespace star.M1
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             double a = double.NaN;
-            if (DA.GetData(0, ref a))
-            {
-                return;
-            }
+            DA.GetData(0, ref a);
             
             a = a * 2;
             DA.SetData(0, a);
