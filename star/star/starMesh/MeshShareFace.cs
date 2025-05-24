@@ -26,7 +26,8 @@ namespace star.starMesh
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Mesh", "M", "网格", GH_ParamAccess.tree);
+            pManager.AddMeshParameter("Mesh", "M", "网格", GH_ParamAccess.tree);
+            //pManager.AddGenericParameter("Mesh", "M", "网格", GH_ParamAccess.tree);
         }
 
         /// <summary>
@@ -43,16 +44,17 @@ namespace star.starMesh
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            GH_Structure<IGH_Goo> dataTree = new GH_Structure<IGH_Goo>();
+            GH_Structure<GH_Mesh> dataTree = new GH_Structure<GH_Mesh>();
+            //_Structure<IGH_Goo> dataTree = new GH_Structure<IGH_Goo>();
             DA.GetDataTree(0, out dataTree);
             for (int y = 0; y < dataTree.PathCount; y++)
             {
-                List<IGH_Goo> listTree = new List<IGH_Goo>();
+                List<GH_Mesh> listTree = new List<GH_Mesh>();
                 listTree = dataTree[y];
                 for (int z = 0; z < listTree.Count; z++)
                 {
-                    Mesh mesh = new Mesh();
-                    GH_Convert.ToMesh(listTree[z], ref mesh, GH_Conversion.Both);
+                    Mesh mesh = listTree[z].Value;
+                    //GH_Convert.ToMesh(listTree[z], ref mesh, GH_Conversion.Both);
                     int[] result = new int[0];
                     int meshcount = mesh.Faces.Count;
                     int edgecount = mesh.TopologyEdges.Count;

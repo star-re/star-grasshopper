@@ -11,8 +11,8 @@ namespace star
         public override Grasshopper.Kernel.GH_LoadingInstruction PriorityLoad()
         {
             Grasshopper.Instances.ComponentServer.AddCategoryIcon("star", Properties.Resources.star);
-            Grasshopper.Instances.ComponentServer.AddCategoryShortName("star", "S");
-            Grasshopper.Instances.ComponentServer.AddCategorySymbolName("star",'S');
+            Grasshopper.Instances.ComponentServer.AddCategoryShortName("star","**");
+            Grasshopper.Instances.ComponentServer.AddCategorySymbolName("star",'*');
             Grasshopper.Instances.Settings.ConstainsEntry("star");
             return Grasshopper.Kernel.GH_LoadingInstruction.Proceed;
         }

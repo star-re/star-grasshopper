@@ -15,7 +15,6 @@ namespace star.Display
         //{
         //}
 
-
         /// <summary>
         /// Initializes a new instance of the blingbling class.
         /// </summary>
@@ -51,29 +50,43 @@ namespace star.Display
             List<Point3d> p = new List<Point3d>();
             DA.GetDataList(0, p);
             
+            HiddenLineDrawingParameters hiddenLineDrawingParameters = new HiddenLineDrawingParameters
+            {
+                AbsoluteTolerance = Rhino.RhinoDoc.ActiveDoc.ModelAbsoluteTolerance
+            };
             px1(p);
         }
 
-        private static List<Point3d> px;
+        private static List<Point3d> px = new List<Point3d>();
 
         public static List<Point3d> px1(List<Point3d> pp)
         {
-            px = pp;
+            px.AddRange(pp);
             return px;
         }
-        public int a1;
+        public int a1 = 2;
         public bool a = false;
         public bool b = false;
         public bool c = false;
 
+        public override void ClearData()
+        {
+            base.ClearData();
+            if (px != null)
+            {
+                px.Clear();
+            }
+        }
 
         //Draw all wires and points in this method.
         public override void DrawViewportWires(IGH_PreviewArgs args)
         {
 
             var result = Rhino.Display.PointStyle.RoundControlPoint;
+
             if (a1 == 1)
             {
+                
                 result = Rhino.Display.PointStyle.Circle;
                 a = true;
             }
@@ -94,7 +107,6 @@ namespace star.Display
             {
                 args.Display.DrawPoint(item, result, 6, Color.FromArgb(0, 210, 255));
             }
-
         }
 
 
@@ -107,9 +119,13 @@ namespace star.Display
             // is still there and operational.
             base.AppendAdditionalMenuItems(menu);
 
-            Menu_AppendItem(menu, "Circle", Menu_Circle, true,a);
-            Menu_AppendItem(menu, "RoundControlPoint", Menu_RoundControlPoint, true,b);
-            Menu_AppendItem(menu, "Pin", Menu_Pin, true, c);
+            Bitmap b1 = new Bitmap(Properties.Resources.circle_circle);
+            Bitmap b2 = new Bitmap(Properties.Resources.circle);
+            Bitmap b3 = new Bitmap(Properties.Resources.pin);
+
+            Menu_AppendItem(menu, "Circle", Menu_Circle,b1, true, a);
+            Menu_AppendItem(menu, "RoundControlPoint", Menu_RoundControlPoint,b2, true, b);
+            Menu_AppendItem(menu, "Pin", Menu_Pin,b3, true, c);
         }
 
         public void Menu_Circle(Object sender, EventArgs e)
@@ -128,6 +144,13 @@ namespace star.Display
             this.ExpireSolution(true);
         }
 
+        public override GH_Exposure Exposure
+        {
+            get
+            {
+                return GH_Exposure.primary;
+            }
+        }
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>

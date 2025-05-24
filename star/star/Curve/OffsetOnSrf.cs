@@ -42,6 +42,7 @@ namespace star
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+            Rhino.Display.DisplayModeDescription[] rdd = Rhino.Display.DisplayModeDescription.GetDisplayModes();
             List<Curve> curves = new List<Curve>();
             double num = double.NaN;
             List<Surface> surfaces = new List<Surface>();

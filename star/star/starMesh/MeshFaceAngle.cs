@@ -27,7 +27,7 @@ namespace star.starMesh
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Mesh", "M", "接入网格面", GH_ParamAccess.tree);
+            pManager.AddMeshParameter("Mesh", "M", "接入网格面", GH_ParamAccess.tree);
         }
 
         /// <summary>
@@ -45,16 +45,16 @@ namespace star.starMesh
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            GH_Structure<IGH_Goo> dataTree = new GH_Structure<IGH_Goo>();
+            GH_Structure<GH_Mesh> dataTree = new GH_Structure<GH_Mesh>();
             DA.GetDataTree(0, out dataTree);
             for (int y = 0; y < dataTree.PathCount; y++)
             {
-                List<IGH_Goo> listTree = new List<IGH_Goo>();
+                List<GH_Mesh> listTree = new List<GH_Mesh>();
                 listTree = dataTree[y];
                 for (int z = 0; z < listTree.Count; z++)
                 {
-                    Mesh mesh = new Mesh();
-                    GH_Convert.ToMesh(listTree[z], ref mesh, GH_Conversion.Both);
+                    Mesh mesh = listTree[z].Value;
+                    //GH_Convert.ToMesh(listTree[z], ref mesh, GH_Conversion.Both);
                     Polyline[] polyline = mesh.GetNakedEdges();
                     Curve[] explode = polyline[0].ToNurbsCurve().DuplicateSegments();
                     List<double> angle = new List<double>();

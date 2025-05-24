@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using Grasshopper.Kernel;
 using Rhino.Geometry;
+using System.Linq;
 
 namespace star.M1
 {
@@ -44,23 +45,30 @@ namespace star.M1
             List<bool> bools = new List<bool>();
             DA.GetDataList(0, bools);
 
-            List<int> index = new List<int>();
-            List<int> index2 = new List<int>();
-            for (int i = 0; i < bools.Count; i++)
-            {
-                if (bools[i] == true)
-                {
-                    index.Add(i);
-                }
-                else
-                {
-                    index2.Add(i);
-                }
-            }
+            string ss = string.Empty;
+            List<int> index1 = bools.AsParallel().AsOrdered().Select((value, index) => new { value, index })
+                      .Where(x => x.value)
+                      .Select(x => x.index).ToList();
+            List<int> index2 = bools.AsParallel().AsOrdered().Select((value, index) => new { value, index })
+                      .Where(x => !x.value)
+                      .Select(x => x.index).ToList();
 
-            DA.SetDataList(0, index);
+            //for (int i = 0; i < bools.Count; i++)
+            //{
+            //    if (bools[i] == true)
+            //    {
+            //        index.Add(i);
+            //    }
+            //    else
+            //    {
+            //        index2.Add(i);
+            //    }
+            //}
+
+            DA.SetDataList(0, index1);
             DA.SetDataList(1, index2);
         }
+
 
         /// <summary>
         /// Provides an Icon for the component.

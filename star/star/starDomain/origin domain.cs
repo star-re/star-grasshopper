@@ -78,7 +78,7 @@ namespace star.Domain
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("fda755b3-ad42-4a3b-ba1d-8de53896ed9d"); }
+            get { return new Guid("00000000-ad42-4a3b-ba1d-8de53896ed9d"); }
         }
     }
 }

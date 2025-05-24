@@ -47,6 +47,7 @@ namespace star
         protected override void SolveInstance(IGH_DataAccess DA)
         {
             Curve curveType = null;
+
             DA.GetData(0, ref curveType);
             if (curveType != null)
             {

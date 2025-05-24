@@ -4,6 +4,7 @@ using System.Drawing;
 
 using Grasshopper;
 using Grasshopper.Kernel;
+using Rhino;
 using Rhino.Geometry;
 using Rhino.DocObjects;
 using Grasshopper.Kernel.Types;
@@ -41,6 +42,7 @@ namespace star
             pManager.Register_DoubleParam("Height", "H", "文字高度", GH_ParamAccess.item);
             pManager.AddPlaneParameter("Plane", "P", "中心平面", GH_ParamAccess.item);
             pManager.AddNumberParameter("Angle", "A", "文字角度", GH_ParamAccess.item);
+            pManager.AddColourParameter("Color", "C", "文字颜色", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -58,6 +60,14 @@ namespace star
 
             TextObject to;
             string text;
+            if (Rhino.RhinoDoc.ActiveDoc.Objects.Find(g).GetType() == typeof(TextDotObject))
+            {
+                throw new Exception("这个是注解点");
+            }
+            if (Rhino.RhinoDoc.ActiveDoc.Objects.Find(g).GetType() != typeof(TextObject))
+            {
+                throw new Exception("这个不是文字");
+            }
             to = Rhino.RhinoDoc.ActiveDoc.Objects.Find(g) as TextObject;//查找此guid并转换数据给TO
             text = to.DisplayText;
             DA.SetData(0, text);//返回值给输出端
@@ -75,12 +85,13 @@ namespace star
             p3.Origin = centerP;   //直接把centerP的位置给p3即可把平面移动过去
             DA.SetData(3, p3);
 
-
             Vector3d vx = to.TextGeometry.Plane.XAxis;
             Vector3d vxx = Vector3d.XAxis;
             double vtradian = Vector3d.VectorAngle(vx, vxx);
             double vtangle = 180 / Math.PI * vtradian;
             DA.SetData(4, vtangle);
+
+            DA.SetData(5, to.Attributes.ObjectColor);
         }
 
         /// <summary>

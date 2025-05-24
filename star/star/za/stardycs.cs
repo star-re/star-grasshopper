@@ -169,57 +169,7 @@ namespace star
         }
         #endregion
 
-        #region MergeSort
-        public static void MergeSort(List<double> array)
-        {
-            MergeSort(array, 0, array.Count - 1);  //在调用里调用Mergesort并赋值（array，起始值，数组-1的长度）
-        }
 
-        private static void MergeSort(List<double> array, int p, int a) //被调用方法（array是赋值的数组，p代表起始值赋值，a代表数组-1的长度，对应上面）
-        {
-            if (p < a)  //如果，起始值小于数组-1的长度
-            {
-                int q = (p + a) / 2;    //找出数组中心
-                MergeSort(array, p, q);  //左数组递归分割
-                MergeSort(array, q + 1, a);  //右数组递归分割
-                Merge(array, p, q, a);
-            }
-        }
-
-        private static void Merge(List<double> array, int p, int q, int r)
-        {
-            double[] L = new double[q - p + 2];
-            double[] R = new double[r - q + 1];
-            L[q - p + 1] = int.MaxValue;
-            R[r - q] = int.MaxValue;
-
-            for (int i = 0; i < q - p + 1; i++)
-            {
-                L[i] = array[p + i];
-            }
-
-            for (int i = 0; i < r - q; i++)
-            {
-                R[i] = array[q + 1 + i];
-            }
-
-            int j = 0;
-            int k = 0;
-            for (int i = 0; i < r - p + 1; i++)
-            {
-                if (L[j] <= R[k])
-                {
-                    array[p + i] = L[j];
-                    j++;
-                }
-                else
-                {
-                    array[p + i] = R[k];
-                    k++;
-                }
-            }
-        }
-        #endregion
         //Administrator  l9815
 
         /// <summary>
@@ -229,6 +179,7 @@ namespace star
         /// <returns></returns>
         public Point3d Pointaverage(List<Point3d> points)
         {
+            Console.WriteLine();
             List<double> xa = new List<double>();
             List<double> ya = new List<double>();
             List<double> za = new List<double>();
@@ -275,6 +226,245 @@ namespace star
                 curveMid.Add(curves[i].PointAt(0.5));
             }
             return curveMid;
+        }
+        #endregion
+        #region CurveExplorer
+        public static bool CurveSegments(List<Curve> list, Curve curve, bool recursive)
+        {
+            if (curve == null)
+            {
+                return false;
+            }
+            PolyCurve polyCurve = curve as PolyCurve;
+            if (polyCurve != null)
+            {
+                if (recursive)
+                {
+                    polyCurve.RemoveNesting();
+                }
+                Curve[] array = polyCurve.Explode();
+                if (array == null)
+                {
+                    return false;
+                }
+                if (array.Length == 0)
+                {
+                    return false;
+                }
+                if (recursive)
+                {
+                    foreach (Curve curve2 in array)
+                    {
+                        CurveSegments(list, curve2, recursive);
+                    }
+                }
+                else
+                {
+                    foreach (Curve item in array)
+                    {
+                        list.Add(item);
+                    }
+                }
+                return true;
+            }
+            else
+            {
+                PolylineCurve polylineCurve = curve as PolylineCurve;
+                if (polylineCurve != null)
+                {
+                    for (int k = 0; k < polylineCurve.PointCount - 1; k++)
+                    {
+                        list.Add(new LineCurve(polylineCurve.Point(k), polylineCurve.Point(k + 1)));
+                    }
+                    return true;
+                }
+                Polyline polyline;
+                if (curve.TryGetPolyline(out polyline))
+                {
+                    for (int l = 0; l < polyline.Count - 1; l++)
+                    {
+                        list.Add(new LineCurve(polyline[l], polyline[l + 1]));
+                    }
+                    return true;
+                }
+                LineCurve lineCurve = curve as LineCurve;
+                if (lineCurve != null)
+                {
+                    list.Add(lineCurve.DuplicateCurve());
+                    return true;
+                }
+                ArcCurve arcCurve = curve as ArcCurve;
+                if (arcCurve != null)
+                {
+                    list.Add(arcCurve.DuplicateCurve());
+                    return true;
+                }
+                return CurveSegments(list, curve.ToNurbsCurve());
+            }
+        }
+
+        // Token: 0x060007EE RID: 2030 RVA: 0x00029584 File Offset: 0x00027784
+        private static bool CurveSegments(List<Curve> list, NurbsCurve nurbs)
+        {
+            int count = list.Count;
+            if (nurbs == null)
+            {
+                return false;
+            }
+            double num = nurbs.Domain.Min;
+            double max = nurbs.Domain.Max;
+            double num2;
+            while (nurbs.GetNextDiscontinuity(Continuity.C1_locus_continuous, num, max, out num2))
+            {
+                Interval interval = new Interval(num, num2);
+                //interval.ctor(num, num2);
+                num = num2;
+                if (interval.Length >= 1E-16)
+                {
+                    Curve curve = nurbs.Trim(interval);
+                    if (curve.IsValid)
+                    {
+                        list.Add(curve);
+                    }
+                }
+            }
+            Interval interval2 = new Interval(num, num2);
+            //interval2.ctor(num, max);
+            if (interval2.Length > 1E-16)
+            {
+                Curve curve2 = nurbs.Trim(interval2);
+                if (curve2.IsValid)
+                {
+                    list.Add(curve2);
+                }
+            }
+            if (list.Count == count)
+            {
+                list.Add(nurbs);
+            }
+            return true;
+        }
+        #endregion
+
+        #region 曲线Flip
+        public static bool CurveFlip(Curve curve,Curve curve2)
+        {
+            bool flag = !curve2.IsClosed && curve2.IsLinear(curve2.GetLength() * 0.01);
+            if (flag)
+            {
+                Vector3d vector3d = curve2.PointAtEnd - curve2.PointAtStart;
+                if (curve.IsClosed)
+                {
+                    return false;
+                }
+                Vector3d other = curve.PointAtEnd - curve.PointAtStart;
+                if (vector3d.IsParallelTo(other, 1.5707963267948966) == 1)
+                {
+                    return false;
+                }
+                return true;
+            }
+            else
+            {
+                Plane plane = CurvePlane(curve);
+                Plane plane2 = CurvePlane(curve2);
+                Polyline cp = curve.ToNurbsCurve().Points.ControlPolygon();
+                Polyline cp2 = curve2.ToNurbsCurve().Points.ControlPolygon();
+                int num = plane.ZAxis.IsParallelTo(plane2.ZAxis, 0.7853981633974483);
+                if (num != -1)
+                {
+                    if (num != 1)
+                    {
+                        if (IsAligned(curve, curve2))
+                        {
+                            return false;
+                        }
+                        return true;
+                    }
+                    else
+                    {
+                        bool flag2 = IsClockwise(cp, plane);
+                        bool flag3 = IsClockwise(cp2, plane2);
+                        if (flag2 == flag3)
+                        {
+                            return false;
+                        }
+                        return true;
+                    }
+                }
+                else
+                {
+                    bool flag4 = IsClockwise(cp, plane);
+                    bool flag5 = IsClockwise(cp2, plane2);
+                    if (flag4 != flag5)
+                    {
+                        return false;
+                    }
+                    return true;
+                }
+            }
+        }
+
+        // Token: 0x06000320 RID: 800 RVA: 0x00013E24 File Offset: 0x00012024
+        private static Plane CurvePlane(Curve curve)
+        {
+            Plane result;
+            if (curve.TryGetPlane(out result, curve.GetLength() * 0.01))
+            {
+                return result;
+            }
+            Polyline points = curve.ToNurbsCurve().Points.ControlPolygon();
+            if (Plane.FitPlaneToPoints(points, out result) == PlaneFitResult.Success)
+            {
+                return result;
+            }
+            return Plane.Unset;
+        }
+
+        // Token: 0x06000321 RID: 801 RVA: 0x00013E70 File Offset: 0x00012070
+        private static bool IsClockwise(Polyline cp, Plane plane)
+        {
+            cp.Transform(Transform.PlaneToPlane(plane, Plane.WorldXY));
+            cp.Transform(Transform.PlanarProjection(Plane.WorldXY));
+            if (!cp.IsClosed)
+            {
+                cp.Add(cp[0]);
+            }
+            double num = 0.0;
+            for (int i = 0; i < cp.Count - 1; i++)
+            {
+                double num2 = cp[i + 1].X - cp[i].X;
+                double num3 = cp[i + 1].Y + cp[i].Y;
+                num += num2 * num3;
+            }
+            return num > 0.0;
+        }
+
+        // Token: 0x06000322 RID: 802 RVA: 0x00013F2C File Offset: 0x0001212C
+        private static bool IsAligned(Curve curve, Curve guide)
+        {
+            int num = curve.SpanCount * Math.Min(curve.Degree, 3);
+            int num2 = 0;
+            for (int i = 0; i < num; i++)
+            {
+                double t = curve.Domain.ParameterAt((double)i / (double)num);
+                Point3d testPoint = curve.PointAt(t);
+                Vector3d vector3d = curve.TangentAt(t);
+                double t2;
+                if (guide.ClosestPoint(testPoint, out t2))
+                {
+                    Vector3d other = guide.TangentAt(t2);
+                    if (vector3d.IsParallelTo(other, 1.5707963267948966) >= 0)
+                    {
+                        num2++;
+                    }
+                    else
+                    {
+                        num2--;
+                    }
+                }
+            }
+            return num2 >= 0;
         }
         #endregion
 
@@ -352,7 +542,7 @@ namespace star
         /// <param name="angle"></param>
         /// <returns></returns>
         #region 角度转弧度
-        public double Radians(double angle)
+        public static double Radians(double angle)
         {
             double a = angle * Math.PI / 180;
             return a;
@@ -365,7 +555,7 @@ namespace star
         /// <param name="radians"></param>
         /// <returns></returns>
         #region 弧度转角度
-        public double Dreeges(double radians)
+        public static double Dreeges(double radians)
         {
             double a = 180 / Math.PI * radians;
             return a;
@@ -387,6 +577,34 @@ namespace star
         }
         #endregion
 
+        /// <summary>
+        /// 切换布尔后刷新，第一次调用为true，若不切换则为false
+        /// </summary>
+        #region 切换布尔后刷新，第一次调用为true，若不切换则为false
+        public static int index = 0;
+        public static bool BoolFixed(bool bb)
+        {
+            bbb = bb;
+            if (index != 0)
+            {
+                if (bb == cc)
+                {
+                    index = 0;
+                    cc = !bb;
+                    return true;
+                }
+                return false;
+            }
+            else
+            {
+                index++;
+                return true;
+            }
+        }
+
+        public static bool bbb;
+        public static bool cc;
+        #endregion
         /// <summary>
         /// 
         /// </summary>

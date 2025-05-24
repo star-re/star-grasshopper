@@ -48,24 +48,21 @@ namespace star
             DA.GetData(0, ref curve);
             DA.GetData(1, ref cOunt);
             /*----------------------------------------------------*/
-            if (curve != null && cOunt != null)
+            List<Point3d> pointlist = new List<Point3d>();
+            List<Vector3d> xAxis = new List<Vector3d>();
+            List<Vector3d> yAxis = new List<Vector3d>();
+            Vector3d zAxis = Vector3d.ZAxis;
+            double[] pdouble = curve.DivideByCount(cOunt, true);
+            for (int i = 0; i < pdouble.Length; i++)
             {
-                List<Point3d> pointlist = new List<Point3d>();
-                List<Vector3d> xAxis = new List<Vector3d>();
-                List<Vector3d> yAxis = new List<Vector3d>();
-                Vector3d zAxis = Vector3d.ZAxis;
-                double[] pdouble = curve.DivideByCount(cOunt, true);
-                for (int i = 0; i < pdouble.Length; i++)
-                {
-                    xAxis.Add(curve.TangentAt(pdouble[i]));
-                    yAxis.Add(curve.CurvatureAt(pdouble[i]));
-                    pointlist.Add(curve.PointAt(pdouble[i]));
-                }
-
-                DA.SetDataList(0, pointlist);
-                DA.SetDataList(1, xAxis);
-                DA.SetDataList(2, yAxis);
+                xAxis.Add(curve.TangentAt(pdouble[i]));
+                yAxis.Add(curve.CurvatureAt(pdouble[i]));
+                pointlist.Add(curve.PointAt(pdouble[i]));
             }
+
+            DA.SetDataList(0, pointlist);
+            DA.SetDataList(1, xAxis);
+            DA.SetDataList(2, yAxis);
         }
 
         /// <summary>

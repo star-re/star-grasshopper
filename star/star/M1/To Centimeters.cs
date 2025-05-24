@@ -16,6 +16,8 @@ namespace star.M1
               "单位转化到厘米",
               "star", "math")
         {
+            string unit = Rhino.RhinoDoc.ActiveDoc.ModelUnitSystem.ToString();
+            Message = string.Concat("文档单位：", unit);
         }
 
         /// <summary>
@@ -42,29 +44,27 @@ namespace star.M1
         {
             double douBle = double.NaN;
             DA.GetData(0, ref douBle);
-            if (douBle != null)
-            {
-                string unit = Rhino.RhinoDoc.ActiveDoc.ModelUnitSystem.ToString();
 
-                var result = new Object();
-                if (unit == "Millimeters")
-                {
-                    result = douBle / 10;
-                }
-                else if (unit == "Centimeters")
-                {
-                    result = douBle;
-                }
-                else if (unit == "Meters")
-                {
-                    result = douBle * 100;
-                }
-                else
-                {
-                    result = "单位是" + unit + "，别转了，转了也看不懂";
-                }
-                DA.SetData(0, result);
+            string unit = Rhino.RhinoDoc.ActiveDoc.ModelUnitSystem.ToString();
+
+            var result = new Object();
+            if (unit == "Millimeters")
+            {
+                result = douBle / 10;
             }
+            else if (unit == "Centimeters")
+            {
+                result = douBle;
+            }
+            else if (unit == "Meters")
+            {
+                result = douBle * 100;
+            }
+            else
+            {
+                result = "单位是" + unit + "，别转了，转了也看不懂";
+            }
+            DA.SetData(0, result);
         }
 
         /// <summary>

@@ -46,18 +46,16 @@ namespace star
             DA.GetData(0, ref curve);
             DA.GetData(1, ref degree);
             /*----------------------------------------------------*/
-            if (curve != null && degree != null)
+
+            if (degree > 32)
             {
-                if (degree > 32)
-                {
-                    DA.SetData(0, "阶数无法超过32");
-                }
-                else
-                {
-                    NurbsCurve nc = (NurbsCurve)curve;
-                    nc.IncreaseDegree(degree);
-                    DA.SetData(0, nc);
-                }
+                DA.SetData(0, "阶数无法超过32");
+            }
+            else
+            {
+                NurbsCurve nc = curve.ToNurbsCurve();
+                nc.IncreaseDegree(degree);
+                DA.SetData(0, nc);
             }
         }
 

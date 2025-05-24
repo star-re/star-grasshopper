@@ -3,18 +3,19 @@ using System.Collections.Generic;
 
 using Grasshopper.Kernel;
 using Rhino.Geometry;
+using System.Drawing;
 
-namespace star.M1
+namespace star.Display.color
 {
-    public class MyComponent1 : GH_Component
+    public class color_alpha : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the MyComponent1 class.
+        /// Initializes a new instance of the color_alpha class.
         /// </summary>
-        public MyComponent1()
-          : base("MyComponent1", "Nickname",
-              "Description",
-              "Category", "Subcategory")
+        public color_alpha()
+          : base("color alpha", "color alpha",
+              "颜色的透明度",
+              "star", "Display")
         {
         }
 
@@ -23,7 +24,8 @@ namespace star.M1
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddIntegerParameter("number", "n", "请输入一组整数", GH_ParamAccess.list);
+            pManager.AddColourParameter("Colors", "C", "色s", GH_ParamAccess.item);
+            pManager.AddIntegerParameter("Alpha", "A", "透明度：0~255", GH_ParamAccess.item,255);
         }
 
         /// <summary>
@@ -31,7 +33,7 @@ namespace star.M1
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddBooleanParameter("Booleans", "Bools", "布尔群", GH_ParamAccess.list);
+            pManager.AddColourParameter("Colors", "C", "色s", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -40,12 +42,22 @@ namespace star.M1
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            List<int> num = new List<int>(); ;
-            DA.GetDataList(0,  num);
-            starMathdy starMathdy = new starMathdy();
-            DA.SetDataList(0, starMathdy.Jiou(num));
+            Color color = new Color();
+            int alpha = 255;
+            DA.GetData(0, ref color);
+            DA.GetData(1, ref alpha);
+            /*-----------------------------------*/
+            color = Color.FromArgb(alpha, color);
+            DA.SetData(0, color);
         }
 
+        public override GH_Exposure Exposure
+        {
+            get
+            {
+                return GH_Exposure.secondary;
+            }
+        }
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -55,7 +67,7 @@ namespace star.M1
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Properties.Resources.color_alpha;
             }
         }
 
@@ -64,7 +76,7 @@ namespace star.M1
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("ced05296-f12f-4636-b1c5-1354d6234d6c"); }
+            get { return new Guid("b864ef0c-94a5-4fc5-92b6-76e284766492"); }
         }
     }
 }

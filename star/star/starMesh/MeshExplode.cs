@@ -46,8 +46,7 @@ namespace star.starMesh
             DA.GetData(0, ref mesh);
 
             /*---------------------------------------*/
-            double angleunti = Rhino.RhinoDoc.ActiveDoc.ModelAngleToleranceDegrees;
-            mesh.Unweld(angleunti, true);
+            mesh.Unweld(0,true);
             Mesh[] meshs = mesh.ExplodeAtUnweldedEdges();
             DA.SetDataList(0, meshs);
 

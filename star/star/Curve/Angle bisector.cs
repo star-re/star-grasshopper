@@ -58,36 +58,33 @@ namespace star
             DA.GetData(1, ref lineb);
             DA.GetData(2, ref length);
             /*----------------------------------------------------*/
-            if (linea != null && lineb != null && length != null)
+            if (Intersection.LineLine(linea, lineb, out d1, out d2))
             {
-                if (Intersection.LineLine(linea, lineb, out d1, out d2))
-                {
-                    center = linea.PointAt(d1);
-                }
-                v1 = linea.Direction;
-                v2 = lineb.Direction;
-                double pointdistance1 = linea.From.DistanceTo(center);
-                double pointdistance2 = linea.To.DistanceTo(center);
-                double pointdistance3 = lineb.From.DistanceTo(center);
-                double pointdistance4 = lineb.To.DistanceTo(center);
-                if (pointdistance1 > pointdistance2)
-                {
-                    v1 = Vector3d.Negate(v1);
-                }
-
-                if (pointdistance3 > pointdistance4)
-                {
-                    v2 = Vector3d.Negate(v2);
-                }
-                double towline = Vector3d.VectorAngle(v1, v2);
-                Vector3d zAxis = Vector3d.CrossProduct(v1, v2);
-                v1.Rotate(towline / 2, zAxis);
-                Line ab = new Line(center, v1, length);
-
-                DA.SetData(0, center);
-                DA.SetData(1, ab);
-                DA.SetData(2, towline);
+                center = linea.PointAt(d1);
             }
+            v1 = linea.Direction;
+            v2 = lineb.Direction;
+            double pointdistance1 = linea.From.DistanceTo(center);
+            double pointdistance2 = linea.To.DistanceTo(center);
+            double pointdistance3 = lineb.From.DistanceTo(center);
+            double pointdistance4 = lineb.To.DistanceTo(center);
+            if (pointdistance1 > pointdistance2)
+            {
+                v1 = Vector3d.Negate(v1);
+            }
+
+            if (pointdistance3 > pointdistance4)
+            {
+                v2 = Vector3d.Negate(v2);
+            }
+            double towline = Vector3d.VectorAngle(v1, v2);
+            Vector3d zAxis = Vector3d.CrossProduct(v1, v2);
+            v1.Rotate(towline / 2, zAxis);
+            Line ab = new Line(center, v1, length);
+
+            DA.SetData(0, center);
+            DA.SetData(1, ab);
+            DA.SetData(2, towline);
         }
 
         /// <summary>

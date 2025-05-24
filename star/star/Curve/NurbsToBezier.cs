@@ -24,6 +24,7 @@ namespace star
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
             pManager.AddCurveParameter("Curve", "C", "需转换的曲线", GH_ParamAccess.item);
+            Params.Input[0].Optional = false;
         }
 
         /// <summary>
@@ -31,7 +32,7 @@ namespace star
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddCurveParameter("Curve", "C", "转化的曲线结果", GH_ParamAccess.item);
+            pManager.AddCurveParameter("Curve", "C", "转化的曲线结果", GH_ParamAccess.list);
             pManager.AddPointParameter("Node Point", "NP", "节点", GH_ParamAccess.list);
         }
 
@@ -44,27 +45,23 @@ namespace star
             List<double> cspan = new List<double>();
             List<Point3d> spanp = new List<Point3d>();
             Curve curve = null;
-            if (DA.GetData(0, ref curve))//载入曲线
-            {
-                //---------------------------------------------
-                if (curve != null)
+           
+            DA.GetData(0, ref curve);//载入曲线
+             //---------------------------------------------
+                int span = curve.SpanCount;
+                cspan.Add(curve.SpanDomain(0).T0);
+                for (int i = 0; i < span; i++)
                 {
-                    int span = curve.SpanCount;
-                    cspan.Add(curve.SpanDomain(0).T0);
-                    for (int i = 0; i < span; i++)
-                    {
-                        cspan.Add(curve.SpanDomain(i).T1);
-                    }
-                    for (int j = 0; j < cspan.Count; j++)
-                    {
-                        spanp.Add(curve.PointAt(cspan[j]));
-                    }
-                    //---------------------------------------------
-                    Curve[] a = curve.Split(cspan);
-                    DA.SetData(0, a);
-                    DA.SetDataList(1, spanp);
+                    cspan.Add(curve.SpanDomain(i).T1);
                 }
-            }
+                for (int j = 0; j < cspan.Count; j++)
+                {
+                    spanp.Add(curve.PointAt(cspan[j]));
+                }
+                //---------------------------------------------
+                Curve[] a = curve.Split(cspan);
+                DA.SetDataList(0, a);
+                DA.SetDataList(1, spanp);
         }
         /// <summary>
         /// Provides an Icon for the component.

@@ -5,6 +5,7 @@ using Grasshopper.Kernel;
 using Grasshopper.Kernel.Types;
 using Rhino.Geometry;
 using Rhino.DocObjects;
+using System.Drawing;
 
 namespace star.Display
 {
@@ -37,6 +38,7 @@ namespace star.Display
             pManager.AddPointParameter("Plane", "P", "中心平面", GH_ParamAccess.item);
             pManager.AddIntegerParameter("Length", "L", "文字长度", GH_ParamAccess.item);
             pManager.Register_DoubleParam("Height", "H", "文字高度", GH_ParamAccess.item);
+            pManager.AddColourParameter("Color", "C", "颜色", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -56,6 +58,19 @@ namespace star.Display
             DA.GetData(0, ref textguid);//输入数据给g
             string textdottype = "Rhino.Geometry.TextDot";
             string textdottype1 = textguid.ToString();
+            //string a = textguid.ToString();
+            Guid g = new Guid(textdottype1);
+
+            if (Rhino.RhinoDoc.ActiveDoc.Objects.Find(g).GetType() == typeof(TextObject))
+            {
+                throw new Exception("这个是文字");
+            }
+            if (Rhino.RhinoDoc.ActiveDoc.Objects.Find(g).GetType() != typeof(TextDotObject))
+            {
+                throw new Exception("这个不是注解点");
+            }
+
+            to = Rhino.RhinoDoc.ActiveDoc.Objects.Find(g) as TextDotObject;//查找此guid并转换数据给TO
             if (textdottype1 == textdottype)
             {
               //  textDot = (TextDot)textguid;
@@ -64,9 +79,9 @@ namespace star.Display
             }
             else
             {
-                string a = textguid.ToString();
-                Guid g = new Guid(a);
-                to = Rhino.RhinoDoc.ActiveDoc.Objects.Find(g) as TextDotObject;//查找此guid并转换数据给TO
+                //string a = textguid.ToString();
+                //Guid g = new Guid(a);
+                //to = Rhino.RhinoDoc.ActiveDoc.Objects.Find(g) as TextDotObject;//查找此guid并转换数据给TO
                 textDot = to.Geometry as TextDot;
             }
 
@@ -84,6 +99,10 @@ namespace star.Display
 
             int height = textDot.FontHeight;
             DA.SetData(3, height);
+
+            Color dotcolor = to.Attributes.ObjectColor;
+            DA.SetData(4, dotcolor);
+
         }
 
         /// <summary>

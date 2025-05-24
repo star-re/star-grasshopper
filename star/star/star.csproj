@@ -36,14 +36,18 @@
     </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GH_IO">
-      <HintPath>..\..\..\..\Plug-ins\Grasshopper\GH_IO.dll</HintPath>
+    <Reference Include="GH_IO, Version=6.24.20079.23341, Culture=neutral, PublicKeyToken=6a29997d2e6b4f97, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\low about dll\GH_IO.dll</HintPath>
+    </Reference>
+    <Reference Include="GH_Util">
+      <HintPath>..\..\..\..\low about dll\GH_Util.dll</HintPath>
     </Reference>
     <Reference Include="Grasshopper">
-      <HintPath>..\..\..\..\Plug-ins\Grasshopper\Grasshopper.dll</HintPath>
+      <HintPath>..\..\..\..\low about dll\Grasshopper.dll</HintPath>
     </Reference>
     <Reference Include="RhinoCommon">
-      <HintPath>..\..\..\..\System\RhinoCommon.dll</HintPath>
+      <HintPath>..\..\..\..\low about dll\RhinoCommon.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -55,22 +59,55 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Curve\Angle bisector.cs" />
+    <Compile Include="Curve\Arch Height.cs" />
     <Compile Include="Curve\BézierCurveType.cs" />
+    <Compile Include="Curve\Curve Fillet.cs" />
+    <Compile Include="Curve\CurveCP.cs" />
     <Compile Include="Curve\ExtendOnSurface.cs" />
+    <Compile Include="Curve\In and Out Curve.cs" />
     <Compile Include="Curve\Intersection curve.cs" />
+    <Compile Include="Curve\Line SDL Plus.cs" />
+    <Compile Include="Curve\LineAndCurve.cs" />
+    <Compile Include="Curve\MergeLines.cs" />
     <Compile Include="Curve\NurbsToBezier.cs" />
     <Compile Include="Curve\Curve Degree.cs" />
     <Compile Include="Curve\OffsetOnSrf.cs" />
+    <Compile Include="Curve\reference extend Curve.cs" />
+    <Compile Include="Curve\Reference Offset Curve.cs" />
     <Compile Include="Display\blingbling.cs" />
-    <Compile Include="Display\Color reverse.cs" />
+    <Compile Include="Display\color\color alpha.cs" />
+    <Compile Include="Display\color\Color reverse.cs" />
+    <Compile Include="Display\color\Dark Color.cs" />
+    <Compile Include="Display\color\Fuse Color.cs" />
+    <Compile Include="Display\CommandDisplay.cs" />
     <Compile Include="Display\Guid TextDot.cs" />
-    <Compile Include="Display\Screen Color.cs" />
+    <Compile Include="Display\color\Screen Color.cs" />
+    <Compile Include="Display\Object Status.cs" />
+    <Compile Include="Display\Text Reverse.cs" />
     <Compile Include="Display\unti.cs" />
+    <Compile Include="M1\BaseDynamicData.cs" />
+    <Compile Include="M1\Bool choose.cs" />
     <Compile Include="M1\Bool Index.cs" />
+    <Compile Include="M1\Boolean data replace.cs" />
+    <Compile Include="M1\Boolean Merge.cs" />
+    <Compile Include="M1\BoolFixed.cs" />
+    <Compile Include="M1\CreateFloder.cs" />
+    <Compile Include="M1\Tree\Cull List.cs" />
+    <Compile Include="M1\GH_RelayRe.cs" />
+    <Compile Include="M1\DataOutput.cs" />
     <Compile Include="M1\Group Numbers.cs" />
     <Compile Include="M1\Merge Sort.cs" />
-    <Compile Include="M1\MyComponent1.cs" />
-    <Compile Include="M1\MyComponent2.cs" />
+    <Compile Include="M1\DataInput.cs" />
+    <Compile Include="M1\Tree\Shift Tree.cs" />
+    <Compile Include="Display\TextSplit.cs" />
+    <Compile Include="M1\Tree\Tree List.cs" />
+    <Compile Include="M1\Tree\Tree Match.cs" />
+    <Compile Include="M1\Tree\Tree Reverse.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="starDomain\origin domain.cs" />
     <Compile Include="Curve\CurveType.cs" />
     <Compile Include="Curve\Divide Curve.cs" />
@@ -90,15 +127,24 @@
     <Compile Include="starMesh\MeshExplode.cs" />
     <Compile Include="starMesh\MeshFaceAngle.cs" />
     <Compile Include="starMesh\MeshShareFace.cs" />
+    <Compile Include="starPoint\ConcaveHull.cs" />
     <Compile Include="starPoint\Group Points.cs" />
+    <Compile Include="starPoint\LinkMesh.cs" />
+    <Compile Include="starPoint\Mid Point.cs" />
     <Compile Include="starPoint\Round Point.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="starDomain\Number domain Component.cs" />
+    <Compile Include="starPoint\sort point in plane.cs" />
+    <Compile Include="starPoint\Turn Plane.cs" />
+    <Compile Include="starSurface\Brep Split.cs" />
+    <Compile Include="starSurface\BrepFaceIndex.cs" />
+    <Compile Include="starSurface\ConnectSrf.cs" />
     <Compile Include="starSurface\Iso Curve.cs" />
+    <Compile Include="starSurface\Plane On Brep.cs" />
+    <Compile Include="Transform\ArrangeGeometry.cs" />
+    <Compile Include="Transform\Super Stretch.cs" />
+    <Compile Include="za\GH_EdgeFilter.cs" />
+    <Compile Include="za\IGH_GeometricGooWithObjRef.cs" />
+    <Compile Include="za\Param_EdgeFilter.cs" />
     <Compile Include="za\star color.cs" />
     <Compile Include="za\stardycs.cs" />
     <Compile Include="starInfo.cs" />
@@ -111,8 +157,11 @@
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Compile Include="M1\DataInAndOutAttributes.cs" />
+    <None Include="packages.config" />
     <None Include="Resources\OtherComponents.ImageGalleryEditor.resources" />
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +284,123 @@
   <ItemGroup>
     <None Include="Resources\MeshFaceAngle.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bool replace data.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dark color.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fuse color.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color alpha.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reference extend.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sort point in plane.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\circle circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Connect Srf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Plane Split Brep a.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Plane Split Brep b.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Plane Split Brep c.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Planes Split Brep a.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\datainput.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dataoutput.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\textreverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\turn plane.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arch height.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lai dalang.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bool choose.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\aobao.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shift tree.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\object status.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Super_Stretch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Brep Edge In ON.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Line SDL Plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Brep Split.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Reference Offset Curve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Boolean Merge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TextSplit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QQ图片20231221232426.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CurveFillet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EdgeFaceIndex.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CreateFolder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CullList.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TreeList.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ArrangeGeometry.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CurveCLosest.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -244,7 +410,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>Copy "$(TargetPath)" "C:\Users\administrator\AppData\Roaming\Grasshopper\Libraries\star.gha"
+    <PostBuildEvent>Copy "$(TargetPath)" "C:\Users\star\AppData\Roaming\Grasshopper\Libraries\star.gha"
 Erase "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
@@ -257,4 +423,4 @@ Erase "$(TargetPath)"</PostBuildEvent>
     <StartAction>Program</StartAction>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-</Project>
+</Project>                                                                                                   

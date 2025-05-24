@@ -4,17 +4,17 @@ using System.Collections.Generic;
 using Grasshopper.Kernel;
 using Rhino.Geometry;
 
-namespace star.M1
+namespace star.Display
 {
-    public class MyComponent2 : GH_Component
+    public class Text_Reverse : GH_Component
     {
         /// <summary>
-        /// Initializes a new instance of the MyComponent2 class.
+        /// Initializes a new instance of the Text_Reverse class.
         /// </summary>
-        public MyComponent2()
-          : base("MyComponent2", "Nickname",
-              "Description",
-              "Category", "Subcategory")
+        public Text_Reverse()
+          : base("Text Reverse", "Text Reverse",
+              "文字反转，顾名思义，就是（转反字文）",
+              "star", "Display")
         {
         }
 
@@ -23,8 +23,7 @@ namespace star.M1
         /// </summary>
         protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
         {
-            pManager.AddIntegerParameter("number", "n", "请输入一组整数", GH_ParamAccess.list);
-
+            pManager.AddTextParameter("Text", "T", "文字反转：不爽，你打我", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -32,8 +31,7 @@ namespace star.M1
         /// </summary>
         protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
         {
-            pManager.AddBooleanParameter("Booleans", "Bools", "布尔群", GH_ParamAccess.list);
-
+            pManager.AddTextParameter("Result", "R", "结果： 我打你，爽不", GH_ParamAccess.item);
         }
 
         /// <summary>
@@ -42,12 +40,19 @@ namespace star.M1
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            List<int> num = new List<int>();
-            DA.GetDataList(0, num);
-            starMathdy starMathdy = new starMathdy();
-            DA.SetDataList(0, starMathdy.jIou(num));
+            string str = string.Empty;
+            DA.GetData(0, ref str);
+            string result = Reverse(str);
+            DA.SetData(0, result);
         }
 
+        public string Reverse(string input)
+        {
+            char[] array = input.ToCharArray();
+            Array.Reverse(array);
+            string result = new string(array);
+            return result;
+        }
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -57,7 +62,7 @@ namespace star.M1
             {
                 //You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
-                return null;
+                return Properties.Resources.textreverse;
             }
         }
 
@@ -66,7 +71,7 @@ namespace star.M1
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("88fdc354-2f9d-4c26-a3f1-80508ab8c8b6"); }
+            get { return new Guid("4fa5938f-9afd-4eec-817e-84b8f81f3ec2"); }
         }
     }
 }

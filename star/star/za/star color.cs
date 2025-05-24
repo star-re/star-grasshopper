@@ -32,5 +32,36 @@ namespace star
             Color cc = Color.FromArgb(coloraR, coloraG, coloraB);
             return cc;
         }
+
+        public Color dark(Color x, Color y)
+        {
+            Color result;
+            int colorA = x.R + x.G + x.B;
+            int colorB = y.R + y.G + y.B;
+            if (colorA <= colorB)
+            {
+                result = x;
+            }
+            else
+            {
+                result = y;
+            }
+            return result;
+        }
+
+        public Color fuse(Color x, Color y, double f)
+        {
+            int coloraR = x.R;
+            int coloraG = x.G;
+            int coloraB = x.B;
+            int colorbR = y.R;
+            int colorbG = y.G;
+            int colorbB = y.B;
+            int averagecolora = (int)Math.Round(coloraR + (colorbR - coloraR) * f,MidpointRounding.AwayFromZero);
+            int averagecolorb = (int)Math.Round(coloraG + (colorbG - coloraG) * f,MidpointRounding.AwayFromZero);
+            int averagecolorc = (int)Math.Round(coloraB + (colorbB - coloraB) * f,MidpointRounding.AwayFromZero);
+            Color cc = Color.FromArgb(averagecolora, averagecolorb, averagecolorc);
+            return cc;
+        }
     }
 }

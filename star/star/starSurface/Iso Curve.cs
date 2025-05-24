@@ -23,9 +23,8 @@
 //        /// </summary>
 //        protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
 //        {
-//            pManager.AddSurfaceParameter("Surface", "S", "接入曲面", GH_ParamAccess.item);
-
-//            pManager.AddPointParameter("UV Point", "UV", "面上的UV点位", GH_ParamAccess.item);
+//            pManager.AddBrepParameter("Surface", "S", "接入曲面", GH_ParamAccess.item);
+//            pManager.AddCurveParameter("UV Point", "UV", "面上的UV点位", GH_ParamAccess.list);
 //        }
 
 //        /// <summary>
@@ -33,8 +32,8 @@
 //        /// </summary>
 //        protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
 //        {
-//            pManager.AddCurveParameter("U curve", "UC", "U方向的曲线", GH_ParamAccess.item);
-//            pManager.AddCurveParameter("V curve", "VC", "V方向的曲线", GH_ParamAccess.item);
+//            pManager.AddBrepParameter("U curve", "UC", "U方向的曲线", GH_ParamAccess.item);
+//            //pManager.AddCurveParameter("V curve", "VC", "V方向的曲线", GH_ParamAccess.item);
 //        }
 
 //        /// <summary>
@@ -43,17 +42,14 @@
 //        /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
 //        protected override void SolveInstance(IGH_DataAccess DA)
 //        {
-//            Surface getuvSurfeace = null;
-//            Point3d uvpoint = new Point3d();
+//            Brep getuvSurfeace = null;
+//            List<Curve> uvpoint = new List<Curve>();
 //            DA.GetData(0, ref getuvSurfeace);
-//            DA.GetData(1, ref uvpoint);
-
-//            getuvSurfeace.SetDomain(0, new Interval(0, 1));
-//            getuvSurfeace.SetDomain(1, new Interval(0, 1));
-//            Curve ucurve = getuvSurfeace.IsoCurve(0, uvpoint.Y);
-//            Curve vcurve = getuvSurfeace.IsoCurve(1, uvpoint.X);
-//            DA.SetData(0, ucurve);
-//            DA.SetData(1, vcurve);
+//            DA.GetDataList(1,  uvpoint);
+            
+//            Brep bb = getuvSurfeace.Faces[0].Split(uvpoint,0.01);
+//            DA.SetData(0, bb);
+          
 //        }
 
 //        /// <summary>

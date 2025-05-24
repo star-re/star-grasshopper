@@ -16,6 +16,8 @@ namespace star.M1
               "单位转化到米",
               "star", "math")
         {
+            string unit = Rhino.RhinoDoc.ActiveDoc.ModelUnitSystem.ToString();
+            Message = string.Concat("文档单位：", unit);
         }
 
         /// <summary>

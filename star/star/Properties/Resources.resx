@@ -238,4 +238,133 @@
   <data name="screen_color" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\screen color.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="bool_replace_data" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bool replace data.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dark_color" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dark color.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fuse_color" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fuse color.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="color_alpha" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\color alpha.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="reference_extend" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\reference extend.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sort_point_in_plane" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sort point in plane.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="circle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\circle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="circle_circle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\circle circle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Connect_Srf" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Connect Srf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Planes_Split_Brep_a" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Planes Split Brep a.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Plane_Split_Brep_a" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Plane Split Brep a.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Plane_Split_Brep_b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Plane Split Brep b.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Plane_Split_Brep_c" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Plane Split Brep c.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="datainput" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\datainput.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dataoutput" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dataoutput.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="textreverse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\textreverse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="turn_plane" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\turn plane.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arch_height" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arch height.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lai_dalang" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lai dalang.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bool_choose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bool choose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="aobao" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\aobao.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CommandDisplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CommandDisplay.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Plane_On_Brep" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Plane On Brep.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shift_tree" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shift tree.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="object_status" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\object status.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Boolean_Merge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Boolean Merge.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Brep_Edge_In_ON" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Brep Edge In ON.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Brep_Split" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Brep Split.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Line_SDL_Plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Line SDL Plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Reference_Offset_Curve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Reference Offset Curve.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Super_Stretch" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Super_Stretch.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TextSplit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TextSplit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="QQ图片20231221232426" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\QQ图片20231221232426.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CurveFillet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CurveFillet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EdgeFaceIndex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EdgeFaceIndex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ArrangeGeometry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ArrangeGeometry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CreateFolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CreateFolder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CullList" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CullList.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TreeList" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TreeList.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CurveCLosest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CurveCLosest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Extract_Surface_from_length" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Extract Surface from length.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MergeLines" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MergeLines.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
